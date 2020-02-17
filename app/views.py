@@ -37,18 +37,14 @@ def submit():
    new_form = ContactForm()
    if request.method == "POST":
     if new_form.validate_on_submit():
-        FirstName = new_form.FirstName.data
-        LastName = new_form.LastName.data
-        Email = new_form.Email.data
-        Subject = new_form.Subject.data
-        Message = new_form.Message.data
-        return redirect("my_result", FirstName = FirstName, LastName = LastName, Email = Email, Subject = Subject, Message = Message)
+        first_name = new_form["Firstname"]
+        last_name = new_form["Lastname"]
+        my_email = new_form["Email"]
+        my_subject = new_form["Subject"]
+        my_message = new_form["Message"]
+        return redirect("my_result", first_name = Firstname , last_name = Lastname, my_email = my_email, my_subject = Subject, my_message = Message)
     flash_errors(new_form)
-   return render_template("form.html", new_form = ContactForm)
-##
-
-
-
+   return render_template("form.html", new_form = ContactForm())
 
 # Flash errors from the form if validation fails
 def flash_errors(form):

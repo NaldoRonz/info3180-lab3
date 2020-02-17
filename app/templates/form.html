@@ -4,23 +4,26 @@
 <form method = "POST" action = '' >
   {{new_form.csrf_token }}
   <div class = "The Form">
-    {{new_form.FirstName.label}} </br> {{new_form.FirstName}}
+    {{new_form.first_name.label}} </br> {{new_form.first_name}}
   </div>
+  </br>
   <div class = "The Form">
-    {{new_form.LastName.label}} </br> {{new_form.LastName}}
+    {{new_form.last_name.label}} </br> {{new_form.last_name}}
   </div>
+  </br>
   <div class = "The Form">
-    {{new_form.Email.label}} </br> {{new_form.Email}}
+    {{new_form.my_email.label}} </br> {{new_form.my_email}}
   </div>
+  </br>
   <div class = "The Form">
-    {{new_form.Subject.label}} </br> {{new_form.Subject}}
+    {{new_form.my_subject.label}} </br> {{new_form.my_subject}}
   </div>
-    </br></br>
+    </br>
   <div class = "The Form">
-    {{new_form.Message.label}} </br> {{new_form.Message}}
+    {{new_form.my_message.label}} </br> {{new_form.my_message}}
     <textarea name =" Message" rows ="10" cols = "50"/></textarea>
   </div>
-  </br></br>
+  </br>
   <button type= "Submit" value = "Submit">Submit</button>
   </form>
 {% endblock%}
