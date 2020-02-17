@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block main %}
+<form method = "POST" action = '' >
+  {{new_form.csrf_token }}
+  <div class = "The Form">
+    {{new_form.FirstName.label}} </br> {{new_form.FirstName}}
+  </div>
+  <div class = "The Form">
+    {{new_form.LastName.label}} </br> {{new_form.LastName}}
+  </div>
+  <div class = "The Form">
+    {{new_form.Email.label}} </br> {{new_form.Email}}
+  </div>
+  <div class = "The Form">
+    {{new_form.Subject.label}} </br> {{new_form.Subject}}
+  </div>
+    </br></br>
+  <div class = "The Form">
+    {{new_form.Message.label}} </br> {{new_form.Message}}
+    <textarea name =" Message" rows ="10" cols = "50"/></textarea>
+  </div>
+  </br></br>
+  <button type= "Submit" value = "Submit">Submit</button>
+  </form>
+{% endblock%}
