@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block main %}
+<form method = "POST" action = "{{ url_for('my_result') }}" >
+  {{form.csrf_token }}
+  <h1> {{form_name}}</h1>
+  </br>
+  <h2> {{description}}</h2>
+  <div class = "The_Form">
+    <h3> {{form.Firstname.label}} {{required}}</h3> {{form.Firstname(placeholder = name1_explain)}}
+  </div>
+  </br>
+  <div class = "The_Form">
+    <h3> {{form.Lastname.label}} {{required}}</h3> {{form.Lastname(placeholder = name2_explain, autofocus = true)}}
+  </div>
+  </br>
+  <div class = "The_Form">
+    <h3> {{form.Email.label}} {{required}}</h3> {{form.Email(placeholder = email_explain)}}
+  </div>
+  </br>
+  <div class = "The_Form">
+    <h3> {{form.Subject.label}} {{required}}</h3> {{form.Subject(placeholder = sub_explain)}}
+  </div>
+    </br>
+  <div class = "The_Form">
+    <h3> {{form.Message.label}} {{required}}</h3> {{form.Message(class = textarea, placeholder = message_explain)}}
+    <!--<textarea name =" Message" rows ="10" cols = "50"/></textarea> -->
+  </div>
+  </br>
+  <button type= "Submit" value = "Submit">Submit</button>
+  </form>
+{% endblock%}

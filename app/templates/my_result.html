@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
-{% block main %}
-    <h2>Form Submission was a success</h2>
-    <p>Name: <strong>{{Firstname + '' Lastname}} </strong> Email:<strong> {{Email}} </strong>Subject:<strong> {{Subject}} </strong>Message:<strong> {{Message}} </strong>.</p>
+{% block flash %}
+    <h2> Form Submission was a success </h2>
+        {% include 'flash_msg.html' %}
+    <p> Firstame: {{Firstname}} </p>
+    <p> Lastname: {{Lastname}} </p>
+    <p> Email: {{Email}} </p>
+    <p> Subject: {{Subject}} </p>
+    <p> Message: {{Message}} </p>
 {% endblock %}

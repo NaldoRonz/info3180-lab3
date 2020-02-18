@@ -26,25 +26,50 @@ def home():
 def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
-
-
 ###
 # The functions below should be applicable to all Flask apps.
 ###
 
-@app.route("/submit", methods = ["GET","POST"])
-def submit():
-   new_form = ContactForm()
+@app.route("/contact", methods = ["GET","POST"])
+def contact():
+   form = ContactForm()
+   form_name = "Contact Form"
+   description = "Please enter information below to contact owner of site"
+   name1_explain = "Please enter your First name"
+   name2_explain = "Please enter your Last name"
+   email_explain = "Please enter your Email"
+   sub_explain = "Please enter your Subject"
+   message_explain = "Please enter your message"
+   required = "(Required)"
    if request.method == "POST":
-    if new_form.validate_on_submit():
-        first_name = new_form["Firstname"]
-        last_name = new_form["Lastname"]
-        my_email = new_form["Email"]
-        my_subject = new_form["Subject"]
-        my_message = new_form["Message"]
-        return redirect("my_result", first_name = Firstname , last_name = Lastname, my_email = my_email, my_subject = Subject, my_message = Message)
-    flash_errors(new_form)
-   return render_template("form.html", new_form = ContactForm())
+    if form.validate_on_submit():
+        Firstname = form.Firstname.data
+        Lastname = form.Lastname.data
+        Email = form.Email.data
+        Subject = form.Subject.data
+        Message = form.Message.data
+        flash("Successfully Completed")
+        return redirect(url_for("my_result.html"), Firstname = Firstname , Lastname = Lastname, Email = Email, Subject = Subject, Message = Message, form_name = form_name, description = description, name1_explain = name1_explain, name2_explain = name1_explain, email_explain = email_explain, sub_explain = sub_explain, message_explain = message_explain, required = required)
+    flash_errors(form)
+   return render_template("contact.html", form = form, form_name = form_name, description = description, name1_explain = name1_explain, name2_explain = name2_explain, email_explain = email_explain, sub_explain = sub_explain, message_explain = message_explain, required = required)
+
+@app.route("/my_result", methods = ["GET","POST"])
+def my_result():
+   form = ContactForm()
+   if request.method == "POST":
+    Firstname = form.Firstname.data
+    Lastname = form.Lastname.data
+    Email = form.Email.data
+    Subject = form.Subject.data
+    Message = form.Message.data
+   render_template("my_result.html", Firstname = Firstname, Lastname = Lastname, Email = Email, Subject = Subject, Message = Message)
+
+
+app.route("/")
+def validate():
+    msg = Message("Im 21 forever aint no way imma switch", sender = "Reginald", recipients = ["ronaldomreid19@gmail.com"])
+    msg.body = "Im saying"
+    mail.send(msg)
 
 # Flash errors from the form if validation fails
 def flash_errors(form):
