@@ -41,28 +41,18 @@ def contact():
    sub_explain = "Please enter your Subject"
    message_explain = "Please enter your message"
    required = "(Required)"
-   if request.method == "POST":
-    if form.validate_on_submit():
-        Firstname = form.Firstname.data
-        Lastname = form.Lastname.data
-        Email = form.Email.data
-        Subject = form.Subject.data
-        Message = form.Message.data
-        flash("Successfully Completed")
-        return redirect(url_for("my_result.html"), Firstname = Firstname , Lastname = Lastname, Email = Email, Subject = Subject, Message = Message, form_name = form_name, description = description, name1_explain = name1_explain, name2_explain = name1_explain, email_explain = email_explain, sub_explain = sub_explain, message_explain = message_explain, required = required)
-    flash_errors(form)
-   return render_template("contact.html", form = form, form_name = form_name, description = description, name1_explain = name1_explain, name2_explain = name2_explain, email_explain = email_explain, sub_explain = sub_explain, message_explain = message_explain, required = required)
+   Firstname = form.Firstname.data
+   Lastname = form.Lastname.data
+   Email = form.Email.data
+   Subject = form.Subject.data
+   Message = form.Message.data
+   if request.method == "POST" and form.validate():
+       flash("Successfully Completed")
+       return render_template("my_result.html", Firstname = Firstname, Lastname = Lastname, Email = Email, Subject = Subject, Message = Message)
 
-@app.route("/my_result", methods = ["GET","POST"])
-def my_result():
-   form = ContactForm()
-   if request.method == "POST":
-    Firstname = form.Firstname.data
-    Lastname = form.Lastname.data
-    Email = form.Email.data
-    Subject = form.Subject.data
-    Message = form.Message.data
-   render_template("my_result.html", Firstname = Firstname, Lastname = Lastname, Email = Email, Subject = Subject, Message = Message)
+   flash_errors(form)
+   return render_template("contact.html", form = form, Firstname = Firstname, Lastname = Lastname, Email = Email, Subject = Subject, Message = Message, form_name = form_name, description = description, name1_explain = name1_explain, name2_explain = name2_explain, email_explain = email_explain, sub_explain = sub_explain, message_explain = message_explain, required = required)
+
 
 
 app.route("/")
