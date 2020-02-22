@@ -5,7 +5,7 @@ from flask_wtf.csrf import CSRFProtect
 csrf = CSRFProtect()
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'PROBLEMS3'
+app.config['SECRET_KEY'] = 'PRO8LEMS3W%LLArr1458ES7rnG'
 app.config['MAIL_SERVER'] = 'smtp.mailtrap.io'
 app.config['MAIL_PORT'] = '2525'
 app.config['MAIL_USERNAME'] = 'c70a8ece552378'

@@ -45,21 +45,17 @@ def contact():
    Lastname = form.Lastname.data
    Email = form.Email.data
    Subject = form.Subject.data
-   Message = form.Message.data
+   your_message = form.your_message.data
    if request.method == "POST" and form.validate():
        flash("Successfully Completed")
-       return render_template("my_result.html", Firstname = Firstname, Lastname = Lastname, Email = Email, Subject = Subject, Message = Message)
+       msg = Message(form.Subject.data, sender = form.Firstname.data, recipients = [""])
+       msg.body = form.your_message.data
+       mail.send(msg)
+       return render_template("my_result.html", Firstname = Firstname, Lastname = Lastname, Email = Email, Subject = Subject, your_message = your_message)
 
    flash_errors(form)
-   return render_template("contact.html", form = form, Firstname = Firstname, Lastname = Lastname, Email = Email, Subject = Subject, Message = Message, form_name = form_name, description = description, name1_explain = name1_explain, name2_explain = name2_explain, email_explain = email_explain, sub_explain = sub_explain, message_explain = message_explain, required = required)
+   return render_template("contact.html", form = form, Firstname = Firstname, Lastname = Lastname, Email = Email, Subject = Subject, your_message = your_message, form_name = form_name, description = description, name1_explain = name1_explain, name2_explain = name2_explain, email_explain = email_explain, sub_explain = sub_explain, message_explain = message_explain, required = required)
 
-
-
-app.route("/")
-def validate():
-    msg = Message("Im 21 forever aint no way imma switch", sender = "Reginald", recipients = ["ronaldomreid19@gmail.com"])
-    msg.body = "Im saying"
-    mail.send(msg)
 
 # Flash errors from the form if validation fails
 def flash_errors(form):
