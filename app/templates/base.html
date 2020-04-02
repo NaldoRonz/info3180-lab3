@@ -20,22 +20,26 @@
     <header>
         {% include "header.html" %}
     </header>
-    <main>
+    <main> 
+        {% block flash %}
         <div class="container">
-            {% block main %}{% endblock %}
+        {% with messages = get_flashed_messages() %}
+           {% if messages %}
+           {% for message in messages %}
+           <div class="alert alert-warning alert-dismissible fade show" role="alert">
+           {{ message }}
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+            </div>
+           {% endfor %}
+           {% endif %}
+           {% endwith %}
+           {% endblock %}
         </div>
-        <div class="container">
-          {% block flash %}
-            { % with messages = get_flashed_messages() %}
-            {% if messages %}
-            <ul class="flashes">
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-            {% endif %}
-          {% endblock %}
-        </div>
+
+        <div class = "container">
+          {% block main %}{% endblock %}
     </main>
     <footer>
         <div class="container">

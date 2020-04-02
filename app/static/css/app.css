@@ -24,3 +24,8 @@ label {
   font-family: Optima, sans-serif;
   font-size: 16px;
 }
+
+form{
+  padding-left: 20%;
+  padding-right: 20%;
+}

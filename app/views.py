@@ -25,7 +25,7 @@ def home():
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name="Naldo")
 ###
 # The functions below should be applicable to all Flask apps.
 ###
@@ -40,25 +40,23 @@ def contact():
    email_explain = "Please enter your Email"
    sub_explain = "Please enter your Subject"
    message_explain = "Please enter your message"
-   required = "(Required)"
-   Firstname = form.Firstname.data
-   Lastname = form.Lastname.data
-   Email = form.Email.data
-   Subject = form.Subject.data
-   your_message = form.your_message.data
-   if request.method == "POST" and form.validate():
-      #if form.validate() == True:
-      flash("Successfully Completed")
-      msg = Message(form.Subject.data, sender = form.Firstname.data, recipients = [])
+   required = "(Required)" 
+   if request.method == "POST" and form.validate_on_submit():
+      Firstname = form.Firstname.data
+      Lastname = form.Lastname.data
+      Email = form.Email.data
+      Subject = form.Subject.data
+      your_message = form.your_message.data
+      msg = Message(form.Subject.data, sender = form.Firstname.data, recipients = ["@example.com"])
       msg.body = form.your_message.data
       mail.send(msg)
-      return render_template("my_result.html", Firstname = Firstname, Lastname = Lastname, Email = Email, Subject = Subject, your_message = your_message)
+      flash("Successfully Completed")
+      return render_template("home.html", Firstname = Firstname, Lastname = Lastname, Email = Email, Subject = Subject, your_message = your_message)
 
-      #else:
-          #return redirect(url_for('home'))
-
-   flash_errors(form)
-   return render_template("contact.html", form = form, Firstname = Firstname, Lastname = Lastname, Email = Email, Subject = Subject, your_message = your_message, form_name = form_name, description = description, name1_explain = name1_explain, name2_explain = name2_explain, email_explain = email_explain, sub_explain = sub_explain, message_explain = message_explain, required = required)
+   else:
+      flash_errors(form)
+      return render_template("contact.html", form = form, form_name = form_name, description = description, name1_explain = name1_explain, name2_explain = name2_explain, email_explain = email_explain, sub_explain = sub_explain, message_explain = message_explain, required = required)
+  #return redirect(url_for('home'))
 
 
 # Flash errors from the form if validation fails
